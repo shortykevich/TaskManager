@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block main %}
+    <div class="container wrapper flex-grow-1">
+        <h1 class="my-4">Пользователи</h1>
+    <table class="table table-striped">
+        <thead>
+        <th>ID</th>
+        <th>Имя пользователя</th>
+        <th>Полное имя</th>
+        <th>Дата создания</th>
+        <th></th>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            {% with created=user.date_joined %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name }} {{ user.last_name }}</td>
+                <td>{{ created|date:"d.m.Y" }} {{ created|time }}</td>
+                <td>
+                    <a href="{% url "users_update" user.id %}">Edit</a>
+                    <br>
+                    <a href="{% url "users_delete" user.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

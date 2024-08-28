@@ -20,9 +20,12 @@ from django.urls import path, include
 from task_manager import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 urlpatterns += i18n_patterns(
     path('', views.HomeView.as_view(), name='home'),
-    path('admin/', admin.site.urls),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
+    path('users/', include('task_manager.users.urls')),
 )

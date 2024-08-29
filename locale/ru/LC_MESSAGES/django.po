@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-26 03:14+0300\n"
+"POT-Creation-Date: 2024-08-28 18:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,71 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: templates/base.html:6
+#: task_manager/users/forms.py:10 task_manager/users/forms.py:11
+msgid "First Name"
+msgstr "Имя"
+
+#: task_manager/users/forms.py:15 task_manager/users/forms.py:16
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: task_manager/users/views.py:17 task_manager/users/views.py:18
+msgid "You are not logged in! Please, log in."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/users/views.py:21
+msgid "You are not allowed to edit other users!"
+msgstr "У вас нет прав для изменения другого пользователя."
+
+#: task_manager/users/views.py:33
+msgid "User created successfully!"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/users/views.py:45
+msgid "User updated successfully!"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/views.py:26
+msgid "You are now logged in!"
+msgstr "Вы залогинены"
+
+#: task_manager/views.py:35
+msgid "You are now logged out."
+msgstr "Вы разлогинены"
+
+#: templates/base.html:7
 msgid "Task manager Hexlet"
 msgstr "Менеджер задач Hexlet"
 
-#: templates/base.html:16
+#: templates/base.html:17
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: templates/base.html:23
+#: templates/base.html:24 templates/users/index.html:10
 msgid "Users"
 msgstr "Пользователи"
 
 #: templates/base.html:30
+msgid "Statuses"
+msgstr "Статусы"
+
+#: templates/base.html:33
+msgid "Labels"
+msgstr "Метки"
+
+#: templates/base.html:36
+msgid "Tasks"
+msgstr "Задачи"
+
+#: templates/base.html:42
+msgid "Logout"
+msgstr "Выйти"
+
+#: templates/base.html:48 templates/login.html:11
 msgid "Login"
 msgstr "Войти"
 
-#: templates/base.html:33
+#: templates/base.html:51
 msgid "Registration"
 msgstr "Зарегистрироваться"
 
@@ -51,3 +99,55 @@ msgstr "Практические курсы по программировани�
 #: templates/home.html:12
 msgid "Learn more"
 msgstr "Узнать больше"
+
+#: templates/login.html:7
+msgid "Log in"
+msgstr "Вход"
+
+#: templates/users/create.html:7
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: templates/users/create.html:11
+msgid "Register"
+msgstr "Зарегистрировать"
+
+#: templates/users/delete.html:6
+msgid "Deleting a user"
+msgstr "Удаление пользователя"
+
+#: templates/users/delete.html:7
+msgid "Are you sure you want to delete user "
+msgstr "Вы уверены, что хотите удалить"
+
+#: templates/users/delete.html:10
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: templates/users/index.html:14
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/users/index.html:15
+msgid "Full name"
+msgstr "Полное имя"
+
+#: templates/users/index.html:16
+msgid "Joined at"
+msgstr "Дата создания"
+
+#: templates/users/index.html:28
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/users/index.html:30
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/users/update.html:7
+msgid "Edit user"
+msgstr "Изменение пользователя"
+
+#: templates/users/update.html:11
+msgid "Update"
+msgstr "Изменить"

@@ -16,3 +16,9 @@ compile-locales:
 convert-static:
 	poetry run python manage.py collectstatic --no-input
 
+tests-coverage:
+	poetry run coverage run -m pytest
+
+coverage-report:
+	poetry run coverage report -m
+

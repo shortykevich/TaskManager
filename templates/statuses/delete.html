@@ -3,9 +3,9 @@
 {% load django_bootstrap5 %}
 
 {% block main %}
-	<h1 class="my-4">{% trans "Deleting a user" %}</h1>
-    <p>{% trans "Are you sure you want to delete user " %}{{ user.username }}?</p>
-    <form method="post" action="{% url 'users_delete' user.pk %}">
+	<h1 class="my-4">{% trans "Deleting the status" %}</h1>
+    <p>{% trans "Are you sure you want to delete status " %}{{ status.title }}?</p>
+    <form method="post" action="{% url 'statuses_delete' status.pk %}">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="{% trans "Yes, delete"%}">
     </form>

@@ -1,9 +1,10 @@
 import pytest
 from django.utils import translation
 from task_manager.users.models import User
+from task_manager.statuses.models import Status
 
 
-@pytest.fixture(scope='module', autouse=True)
+@pytest.fixture(autouse=True)
 def language():
     return translation.activate('en')
 
@@ -27,6 +28,12 @@ def test_users(db):
 
 
 @pytest.fixture
+def logged_in_client(client, test_users):
+    client.force_login(test_users['user1'])
+    return client
+
+
+@pytest.fixture
 def test_user1_data():
     return {
         'username': 'testuser1',
@@ -34,4 +41,16 @@ def test_user1_data():
         'last_name': 'user',
         'password1': 'testpassword',
         'password2': 'testpassword',
+    }
+
+
+@pytest.fixture
+def test_statuses(db):
+    return {
+        'status1': Status.objects.create(
+            title = "teststatus1"
+        ),
+        'status2': Status.objects.create(
+            title = "teststatus2"
+        )
     }

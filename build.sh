@@ -15,4 +15,4 @@ make migrate
 
 # Adding superuser if you have relevant env variables
 # Comment it if you don't need it
-poetry run python manage.py createsuperuser --noinput
+python manage.py createsuperuser_if_not_exists

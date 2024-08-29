@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.views import View
-from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
+from django.shortcuts import render
 from django.contrib.auth.views import (
     LoginView as BaseLoginView,
     LogoutView as BaseLogoutView,
@@ -18,9 +18,6 @@ class HomeView(View):
 class LoginView(BaseLoginView):
     template_name = 'login.html'
     form_class = LoginForm
-
-    def get_success_url(self):
-        return reverse('home')
 
     def form_valid(self, form):
         messages.success(self.request, _('You are now logged in!'))

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block main %}
+    <div class="container wrapper flex-grow-1">
+        <h1 class="my-4">{% trans "Statuses" %}</h1>
+        <a class="btn btn-primary mb-3" href="{% url "statuses_create" %}">{% trans "Create status" %}</a>
+        <table class="table table-striped">
+            <thead>
+            <th>ID</th>
+            <th>{% trans "Title" %}</th>
+            <th>{% trans "Creation date" %}</th>
+            <th></th>
+            </thead>
+            <tbody>
+            {% for status in statuses %}
+                {% with created=status.created_at %}
+                <tr>
+                    <td>{{ status.id }}</td>
+                    <td>{{ status.title }}</td>
+                    <td>{{ created|date:"d.m.Y" }} {{ created|time }}</td>
+                    <td>
+                        <a href="{% url "statuses_update" status.id %}">{% trans "Edit" %}</a>
+                        <br>
+                        <a href="{% url "statuses_delete" status.id %}">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% endwith %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

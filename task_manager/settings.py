@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+
+from django.conf.global_settings import LOGOUT_REDIRECT_URL
 from dotenv import load_dotenv
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -54,7 +56,8 @@ INSTALLED_APPS = [
     'django_bootstrap5',
     'task_manager',
     'task_manager.users',
-    'task_manager.statuses'
+    'task_manager.statuses',
+    'task_manager.tasks'
 ]
 
 AUTH_USER_MODEL = 'users.User'
@@ -159,4 +162,5 @@ MESSAGE_TAGS = {
 }
 
 LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('login')

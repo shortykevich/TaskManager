@@ -1,6 +1,5 @@
 from django.contrib import messages
 from django.views import View
-from django.urls import reverse, reverse_lazy
 from django.shortcuts import render
 from django.contrib.auth.views import (
     LoginView as BaseLoginView,
@@ -25,9 +24,6 @@ class LoginView(BaseLoginView):
 
 
 class LogoutView(BaseLogoutView):
-    def get_success_url(self):
-        return reverse('home')
-
     def post(self, request, *args, **kwargs):
         messages.info(request, _('You are now logged out.'))
         return super().post(request, *args, **kwargs)

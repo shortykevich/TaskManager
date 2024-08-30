@@ -14,7 +14,7 @@ class StatusesPermissionMixin(LoginRequiredMixin):
     redirect_field_name = reverse_lazy('home')
 
     def handle_no_permission(self):
-        messages.error(self.request, _('You are not authorized! Please login.'))
+        messages.error(self.request, _('You are not authenticated! Please login.'))
         return redirect(self.login_url)
 
     def form_valid(self, form):

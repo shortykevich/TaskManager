@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-28 18:37+0000\n"
+"POT-Creation-Date: 2024-08-30 00:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,35 +20,55 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/users/forms.py:10 task_manager/users/forms.py:11
+#: task_manager/statuses/forms.py:9 templates/statuses/index.html:12
+msgid "Title"
+msgstr "Имя"
+
+#: task_manager/statuses/views.py:17 task_manager/users/views.py:20
+msgid "You are not authenticated! Please login."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
+
+#: task_manager/statuses/views.py:39
+msgid "Your status has been created."
+msgstr "Статус успешно создан"
+
+#: task_manager/statuses/views.py:47
+msgid "Your status has been updated."
+msgstr "Статус успешно изменен"
+
+#: task_manager/statuses/views.py:55
+msgid "Your status has been deleted."
+msgstr "Статус успешно удален"
+
+#: task_manager/users/forms.py:9
 msgid "First Name"
 msgstr "Имя"
 
-#: task_manager/users/forms.py:15 task_manager/users/forms.py:16
+#: task_manager/users/forms.py:13
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: task_manager/users/views.py:17 task_manager/users/views.py:18
-msgid "You are not logged in! Please, log in."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
-
 #: task_manager/users/views.py:21
-msgid "You are not allowed to edit other users!"
+msgid "You are not authorized to access this page."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:33
+#: task_manager/users/views.py:41
 msgid "User created successfully!"
 msgstr "Пользователь успешно зарегистрирован"
 
-#: task_manager/users/views.py:45
+#: task_manager/users/views.py:50
 msgid "User updated successfully!"
 msgstr "Пользователь успешно изменен"
 
-#: task_manager/views.py:26
+#: task_manager/users/views.py:58
+msgid "User deleted successfully!"
+msgstr "Пользователь успешно удален"
+
+#: task_manager/views.py:23
 msgid "You are now logged in!"
 msgstr "Вы залогинены"
 
-#: task_manager/views.py:35
+#: task_manager/views.py:32
 msgid "You are now logged out."
 msgstr "Вы разлогинены"
 
@@ -60,11 +80,11 @@ msgstr "Менеджер задач Hexlet"
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: templates/base.html:24 templates/users/index.html:10
+#: templates/base.html:24 templates/users/index.html:7
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/base.html:30
+#: templates/base.html:30 templates/statuses/index.html:7
 msgid "Statuses"
 msgstr "Статусы"
 
@@ -104,6 +124,46 @@ msgstr "Узнать больше"
 msgid "Log in"
 msgstr "Вход"
 
+#: templates/statuses/create.html:7 templates/statuses/index.html:8
+msgid "Create status"
+msgstr "Создать статус"
+
+#: templates/statuses/create.html:11
+msgid "Create"
+msgstr "Создать"
+
+#: templates/statuses/delete.html:6
+msgid "Deleting the status"
+msgstr "Удаление пользователя"
+
+#: templates/statuses/delete.html:7
+msgid "Are you sure you want to delete"
+msgstr "Вы уверены, что хотите удалить"
+
+#: templates/statuses/delete.html:10 templates/users/delete.html:10
+msgid "Yes, delete"
+msgstr "Да, удалить"
+
+#: templates/statuses/index.html:13
+msgid "Creation date"
+msgstr "Дата создания"
+
+#: templates/statuses/index.html:24 templates/users/index.html:25
+msgid "Edit"
+msgstr "Изменить"
+
+#: templates/statuses/index.html:26 templates/users/index.html:27
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/statuses/update.html:7
+msgid "Edit status"
+msgstr "Изменение статуса"
+
+#: templates/statuses/update.html:11 templates/users/update.html:11
+msgid "Update"
+msgstr "Изменить"
+
 #: templates/users/create.html:7
 msgid "Sign up"
 msgstr "Регистрация"
@@ -120,34 +180,18 @@ msgstr "Удаление пользователя"
 msgid "Are you sure you want to delete user "
 msgstr "Вы уверены, что хотите удалить"
 
-#: templates/users/delete.html:10
-msgid "Yes, delete"
-msgstr "Да, удалить"
-
-#: templates/users/index.html:14
+#: templates/users/index.html:11
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: templates/users/index.html:15
+#: templates/users/index.html:12
 msgid "Full name"
 msgstr "Полное имя"
 
-#: templates/users/index.html:16
+#: templates/users/index.html:13
 msgid "Joined at"
 msgstr "Дата создания"
-
-#: templates/users/index.html:28
-msgid "Edit"
-msgstr "Изменить"
-
-#: templates/users/index.html:30
-msgid "Delete"
-msgstr "Удалить"
 
 #: templates/users/update.html:7
 msgid "Edit user"
 msgstr "Изменение пользователя"
-
-#: templates/users/update.html:11
-msgid "Update"
-msgstr "Изменить"

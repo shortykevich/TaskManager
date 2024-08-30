@@ -8,10 +8,10 @@ migrate:
 	poetry run python manage.py migrate
 
 build-locales:
-	poetry run django-admin makemessages -l ru
+	poetry run python manage.py makemessages -l ru
 
 compile-locales:
-	poetry run django-admin compilemessages
+	poetry run python manage.py compilemessages
 
 convert-static:
 	poetry run python manage.py collectstatic --no-input

@@ -30,4 +30,5 @@ urlpatterns += i18n_patterns(
     path('logout/', views.LogoutView.as_view(), name='logout'),
     path('users/', include('task_manager.users.urls')),
     path('statuses/', include('task_manager.statuses.urls')),
+    path('tasks/', include('task_manager.tasks.urls')),
 )

@@ -15,6 +15,7 @@ import dj_database_url
 from pathlib import Path
 
 from django.conf.global_settings import LOGOUT_REDIRECT_URL
+from django_extensions.management.shells import SHELL_PLUS_DJANGO_IMPORTS
 from dotenv import load_dotenv
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -54,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
+    'django_extensions',
+    'django_filters',
     'task_manager',
     'task_manager.users',
     'task_manager.statuses',
@@ -164,3 +167,5 @@ MESSAGE_TAGS = {
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('login')
+
+SHELL_PLUS_PRINT_SQL = True

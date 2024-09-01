@@ -29,4 +29,6 @@ class Command(BaseCommand):
             email=email
         )
 
-        self.stdout.write(self.style.SUCCESS('Successfully created superuser'))
+        self.stdout.write(
+            self.style.SUCCESS('Successfully created superuser')
+        )

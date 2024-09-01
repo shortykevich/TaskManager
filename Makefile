@@ -1,6 +1,9 @@
 install:
 	poetry install
 
+shell:
+	poetry run python manage.py shell_plus --ipython
+
 migrations:
 	poetry run python manage.py makemigrations
 

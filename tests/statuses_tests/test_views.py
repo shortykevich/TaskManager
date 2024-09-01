@@ -4,21 +4,12 @@ from task_manager.statuses.models import Status
 
 
 @pytest.mark.django_db
-def test_statuses_index_get(client, test_users):
+def test_statuses_permissions(client, test_statuses, test_users):
     response = client.get(reverse('statuses_index'))
 
     assert response.status_code == 302
     assert response.url == reverse('login')
 
-    client.force_login(test_users['user1'])
-    response = client.get(reverse('statuses_index'))
-
-    assert response.status_code == 200
-    assert 'statuses/index.html' in response.template_name
-
-
-@pytest.mark.django_db
-def test_statuses_create_get(client, test_users):
     url = reverse(
         'users_update',
         kwargs={'pk': test_users['user1'].pk}
@@ -28,6 +19,30 @@ def test_statuses_create_get(client, test_users):
     assert response.status_code == 302
     assert response.url == reverse('login')
 
+    url = reverse('statuses_update', kwargs={'pk': test_statuses['status1'].pk})
+    response = client.get(url)
+
+    assert response.status_code == 302
+    assert response.url == reverse('login')
+
+    url = reverse('statuses_delete', kwargs={'pk': test_statuses['status1'].pk})
+    response = client.get(url)
+
+    assert response.status_code == 302
+    assert response.url == reverse('login')
+
+
+@pytest.mark.django_db
+def test_statuses_index_get(client, test_users):
+    client.force_login(test_users['user1'])
+    response = client.get(reverse('statuses_index'))
+
+    assert response.status_code == 200
+    assert 'statuses/index.html' in response.template_name
+
+
+@pytest.mark.django_db
+def test_statuses_create_get(client, test_users):
     client.force_login(test_users['user1'])
     response = client.get(reverse('statuses_create'))
 
@@ -50,10 +65,6 @@ def test_statuses_update_get(client, test_statuses, test_users):
     test_status = test_statuses['status1']
     test_user = test_users['user1']
     url = reverse('statuses_update', kwargs={'pk': test_status.pk})
-    response = client.get(url)
-
-    assert response.status_code == 302
-    assert response.url == reverse('login')
 
     client.force_login(test_user)
     response = client.get(url)
@@ -77,10 +88,6 @@ def test_statuses_delete_get(client, test_statuses, test_users):
     test_status = test_statuses['status1']
     test_user = test_users['user1']
     url = reverse('statuses_delete', kwargs={'pk': test_status.pk})
-    response = client.get(url)
-
-    assert response.status_code == 302
-    assert response.url == reverse('login')
 
     client.force_login(test_user)
     response = client.get(url)

@@ -5,19 +5,23 @@ from task_manager.users.models import User
 
 
 class UsersBaseForm(forms.ModelForm):
-    first_name = forms.CharField(
-        label=_('First Name'),
-        widget=forms.TextInput(),
-        required=True)
-    last_name = forms.CharField(
-        label=_('Last Name'),
-        widget=forms.TextInput(),
-        required=True)
     usable_password = None
 
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username']
+
+        labels = {
+            'first_name': _('First Name'),
+            'last_name': _('Last Name'),
+        }
+
+        widgets = {
+            'first_name': forms.TextInput,
+            'last_name': forms.TextInput,
+        }
+
+        required = {'first_name', 'last_name', 'username'}
 
 
 class UsersCreateForm(UsersBaseForm, BaseUserCreationForm):

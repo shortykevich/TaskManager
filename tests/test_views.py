@@ -1,5 +1,8 @@
 import pytest
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
+
+from tests import get_response_message
 
 
 @pytest.mark.django_db
@@ -25,6 +28,7 @@ def test_login(client, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('home')
+    assert _('You are now logged in!') == get_response_message(response)
     assert test_user.is_authenticated
 
 
@@ -34,3 +38,4 @@ def test_logout(client):
 
     assert response.status_code == 302
     assert response.url == reverse('home')
+    assert _('You are now logged out.') == get_response_message(response)

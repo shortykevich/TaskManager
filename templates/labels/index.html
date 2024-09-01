@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block main %}
+    <div class="container wrapper flex-grow-1">
+        <h1 class="my-4">{% trans "Labels" %}</h1>
+        <a class="btn btn-primary mb-3" href="{% url "labels_create" %}">{% trans "Create label" %}</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>{% trans "Title" %}</th>
+                    <th>{% trans "Creation date" %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for label in labels %}
+                {% with created=label.created_at %}
+                <tr>
+                    <td>{{ label.id }}</td>
+                    <td>{{ label.title }}</td>
+                    <td>{{ created|date:"d.m.Y" }} {{ created|time }}</td>
+                    <td>
+                        <a href="{% url "labels_update" label.id %}">{% trans "Edit" %}</a>
+                        <br>
+                        <a href="{% url "labels_delete" label.id %}">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% endwith %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

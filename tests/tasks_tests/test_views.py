@@ -1,35 +1,39 @@
 import pytest
-from django.shortcuts import reverse
-from django.template.defaultfilters import title
 
-from task_manager.tasks.models import Task
+from tests import get_response_message
+from django.shortcuts import reverse
+from django.utils.translation import gettext_lazy as _
 
 
 @pytest.mark.django_db
-def test_tasks_permissions(client, test_tasks, test_users):
+def test_tasks_authentication(client, test_tasks, test_users):
     url = reverse('tasks_index')
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
     url = reverse('tasks_detail', kwargs={'pk': test_tasks['task1'].pk})
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
     url = reverse('tasks_update', kwargs={'pk': test_tasks['task2'].pk})
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
     url = reverse('tasks_delete', kwargs={'pk': test_tasks['task1'].pk})
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
 
 @pytest.mark.django_db
@@ -71,9 +75,9 @@ def test_tasks_create_post(client, test_tasks, test_users, test_statuses):
         'status': test_statuses['status1'].id
     })
 
-
     assert response.status_code == 302
     assert response.url == reverse('tasks_index')
+    assert _('Task created successfully') == get_response_message(response)
 
 
 @pytest.mark.django_db
@@ -86,6 +90,7 @@ def test_tasks_delete_get(client, test_tasks, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('tasks_index')
+    assert _('Only author can delete task') == get_response_message(response)
 
     client.force_login(test_user1)
     response = client.get(url)
@@ -102,3 +107,4 @@ def test_tasks_delete_post(client, test_tasks, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('tasks_index')
+    assert _('Task deleted successfully') == get_response_message(response)

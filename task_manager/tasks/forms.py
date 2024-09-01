@@ -2,24 +2,25 @@ import django_filters
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-
+from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
 from task_manager.users.models import User
 
 
-class TaskAddForm(forms.ModelForm):
+class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = [
-            'title', 'description', 'status', 'executor'
+            'title', 'description', 'status', 'executor', 'labels'
         ]
 
         labels = {
             'title': _('Title'),
             'description': _('Description'),
             'status': _('Status'),
-            'executor': _('Executor')
+            'executor': _('Executor'),
+            'labels': _('Labels'),
         }
 
         widgets = {
@@ -27,6 +28,7 @@ class TaskAddForm(forms.ModelForm):
             'description': forms.Textarea,
             'status': forms.Select,
             'executor': forms.Select,
+            'labels': forms.SelectMultiple,
         }
 
 
@@ -41,6 +43,11 @@ class TaskFilter(django_filters.FilterSet):
         queryset=User.objects.all(),
         label=_('Executor'),
     )
+    labels = django_filters.ModelChoiceFilter(
+        field_name='labels',
+        queryset=Label.objects.all(),
+        label=_('Label'),
+    )
 
     class Meta:
         model = Task
@@ -48,7 +55,7 @@ class TaskFilter(django_filters.FilterSet):
         fields = {
             'status': ['exact'],
             'executor': ['exact'],
-            # 'label': ['exact'],
+            'labels': ['exact'],
         }
 
     self_tasks = django_filters.BooleanFilter(

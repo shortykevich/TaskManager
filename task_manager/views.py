@@ -7,6 +7,7 @@ from django.contrib.auth.views import (
     LogoutView as BaseLogoutView,
 )
 from django.utils.translation import gettext_lazy as _
+
 from task_manager.forms import LoginForm
 
 

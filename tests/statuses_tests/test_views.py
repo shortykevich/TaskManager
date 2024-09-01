@@ -1,5 +1,8 @@
 import pytest
+from tests import get_response_message
 from django.shortcuts import reverse
+from django.utils.translation import gettext_lazy as _
+
 from task_manager.statuses.models import Status
 
 
@@ -9,31 +12,32 @@ def test_statuses_permissions(client, test_statuses, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
-    url = reverse(
-        'users_update',
-        kwargs={'pk': test_users['user1'].pk}
-    )
+    url = reverse('statuses_create')
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
     url = reverse('statuses_update', kwargs={'pk': test_statuses['status1'].pk})
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
     url = reverse('statuses_delete', kwargs={'pk': test_statuses['status1'].pk})
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
 
 @pytest.mark.django_db
-def test_statuses_index_get(client, test_users):
+def test_statuses_index_get(client, test_users, test_statuses):
     client.force_login(test_users['user1'])
     response = client.get(reverse('statuses_index'))
 
@@ -57,6 +61,7 @@ def test_statuses_create_post(logged_in_client, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('statuses_index')
+    assert _('Your status has been created.') == get_response_message(response)
     assert Status.objects.filter(title='title').exists()
 
 
@@ -75,11 +80,12 @@ def test_statuses_update_get(client, test_statuses, test_users):
 
 @pytest.mark.django_db
 def test_statuses_update_post(logged_in_client, test_statuses, test_users):
-    url = reverse('statuses_create')
+    url = reverse('statuses_update', kwargs={'pk': test_statuses['status1'].pk})
     response = logged_in_client.post(url, {'title': 'title'})
 
     assert response.status_code == 302
     assert response.url == reverse('statuses_index')
+    assert _('Your status has been updated.') == get_response_message(response)
     assert Status.objects.filter(title='title').exists()
 
 
@@ -104,3 +110,4 @@ def test_statuses_delete_post(logged_in_client, test_statuses, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('statuses_index')
+    assert _('Your status has been deleted.') == get_response_message(response)

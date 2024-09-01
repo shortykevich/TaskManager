@@ -1,4 +1,7 @@
 import pytest
+from django.utils.translation import gettext_lazy as _
+
+from tests import get_response_message
 from django.shortcuts import reverse
 
 
@@ -13,28 +16,30 @@ def test_users_creation(client, test_user1_data):
     response = client.post(url, test_user1_data)
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('User created successfully!') == get_response_message(response)
 
 
 @pytest.mark.django_db
-def test_users_update_get(client, admin_client, test_users):
+def test_users_update_get(client, test_users):
     url = reverse('users_update', kwargs={'pk': test_users['user1'].pk})
     response = client.get(url)
 
     assert response.status_code == 302
     assert response.url == reverse('login')
+    assert _('You are not authenticated! Please login.') == get_response_message(response)
 
     client.force_login(test_users['user2'])
     response = client.get(url)
     assert response.status_code == 302
     assert response.url == reverse('users_index')
+    assert _('You are not authorized to access this page.') == get_response_message(response)
 
     client.force_login(test_users['user1'])
     response = client.get(url)
-    admin_response = admin_client.get(url)
 
-    assert response.status_code == admin_response.status_code
     assert response.status_code == 200
     assert 'users/update.html' in response.template_name
+    assert _('You are not authorized to access this page.') == get_response_message(response)
 
 
 @pytest.mark.django_db
@@ -51,6 +56,7 @@ def test_users_update_post(admin_client, test_users):
 
     assert response.status_code == 302
     assert response.url == reverse('users_index')
+    assert _('User updated successfully!') == get_response_message(response)
 
 
 @pytest.mark.django_db

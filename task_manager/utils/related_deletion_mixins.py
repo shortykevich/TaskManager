@@ -4,7 +4,7 @@ from django.views.generic import DeleteView
 from django.db.models.deletion import ProtectedError
 
 
-class DeleteRelatedMixin(DeleteView):
+class DeleteOneToManyMixin(DeleteView):
     def form_valid(self, form):
         try:
             super().form_valid(form)
@@ -14,3 +14,11 @@ class DeleteRelatedMixin(DeleteView):
 
         messages.success(self.request, self.success_message)
         return redirect(self.get_success_url())
+
+
+class DeleteManyToManyMixin(DeleteOneToManyMixin):
+    def form_valid(self, form):
+        if self.object.task_labels.exists():
+            messages.error(self.request, self.error_message)
+            return redirect(self.get_success_url())
+        return super().form_valid(form)

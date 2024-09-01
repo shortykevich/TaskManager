@@ -1,6 +1,7 @@
 import pytest
 from django.utils import translation
 
+from task_manager.labels.models import Label
 from task_manager.tasks.models import Task
 from task_manager.users.models import User
 from task_manager.statuses.models import Status
@@ -8,7 +9,7 @@ from task_manager.statuses.models import Status
 
 @pytest.fixture(autouse=True)
 def language():
-    return translation.activate('en')
+    return translation.activate('ru')
 
 
 @pytest.fixture
@@ -43,6 +44,18 @@ def test_statuses(db):
         ),
         'status2': Status.objects.create(
             title="teststatus2"
+        )
+    }
+
+
+@pytest.fixture
+def test_labels(db):
+    return {
+        'label1': Label.objects.create(
+            title="testlabel1"
+        ),
+        'label2': Label.objects.create(
+            title="testlabel2"
         )
     }
 

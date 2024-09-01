@@ -1,9 +1,10 @@
 import pytest
+from django.urls import reverse
 
 
 @pytest.fixture(scope='module')
 def url():
-    return '/en/tasks/'
+    return reverse('tasks_index')
 
 
 @pytest.mark.django_db

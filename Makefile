@@ -1,14 +1,11 @@
 install:
-	poetry install
-
-shell:
-	poetry run python manage.py shell_plus --ipython
+	poetry install --no-interaction --no-root
 
 migrations:
 	poetry run python manage.py makemigrations
 
 migrate:
-	poetry run python manage.py migrate
+	poetry run python manage.py migrate --fake
 
 build-locales:
 	poetry run python manage.py makemessages -l ru
@@ -22,6 +19,14 @@ convert-static:
 tests-coverage:
 	poetry run coverage run -m pytest
 
+format-coverage:
+	poetry run coverage lcov -o lcov.info
+
 coverage-report:
 	poetry run coverage report -m
 
+format-coverage:
+	poetry run coverage lcov -o lcov.info
+
+lint:
+	poetry run flake8 task_manager

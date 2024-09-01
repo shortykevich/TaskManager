@@ -20,7 +20,7 @@
                 {% with created=status.created_at %}
                 <tr>
                     <td>{{ status.id }}</td>
-                    <td>{{ status.title }}</td>
+                    <td>{{ status.name }}</td>
                     <td>{{ created|date:"d.m.Y" }} {{ created|time }}</td>
                     <td>
                         <a href="{% url "statuses_update" status.id %}">{% trans "Edit" %}</a>

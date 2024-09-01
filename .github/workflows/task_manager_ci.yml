@@ -1,0 +1,67 @@
+name: task-manager-ci
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: task_manager_action
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10.x
+
+      - name: Set env variables
+        run: |
+          echo "DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/task_manager_action" >> $GITHUB_ENV
+          echo "SECRET_KEY=1234" >> $GITHUB_ENV
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Apply migrations
+        run: make migrate
+
+      - name: Installing test-reporter
+        run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 >./cc-test-reporter
+      - run: chmod +x cc-test-reporter
+
+      - name: Testing and formating coverage
+        run: make tests-coverage
+      - run: make format-coverage
+
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_TOKEN }}
+        with:
+          coverageLocations: ${{github.workspace}}/lcov.info:lcov
+
+      - name: Lint
+        run: make lint

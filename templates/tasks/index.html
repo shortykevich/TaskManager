@@ -31,7 +31,7 @@
                 {% with created=task.created_at %}
                 <tr>
                     <td>{{ task.id }}</td>
-                    <td><a href="{% url "tasks_detail" task.id%}">{{ task.title }}</a></td>
+                    <td><a href="{% url "tasks_detail" task.id%}">{{ task.names }}</a></td>
                     <td>{{ task.status }}</td>
                     <td>{{ task.author }}</td>
                     <td>{{ task.executor }}</td>

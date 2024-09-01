@@ -14,8 +14,6 @@ import os
 import dj_database_url
 from pathlib import Path
 
-from django.conf.global_settings import LOGOUT_REDIRECT_URL
-from django_extensions.management.shells import SHELL_PLUS_DJANGO_IMPORTS
 from dotenv import load_dotenv
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -32,18 +30,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME', False)
 DATABASE_URL = os.environ.get('DATABASE_URL')
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if RENDER_EXTERNAL_HOSTNAME else True
+DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = []
-
-if not DEBUG:
-    ALLOWED_HOSTS.extend([RENDER_EXTERNAL_HOSTNAME])
-else:
-    ALLOWED_HOSTS.extend(['localhost', '127.0.0.1', 'webserver'])
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'webserver', 'onrender.com']
 
 # Application definition
 
@@ -55,11 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-    'django_extensions',
     'django_filters',
     'task_manager',
     'task_manager.users',
     'task_manager.statuses',
+    'task_manager.labels',
     'task_manager.tasks'
 ]
 
@@ -75,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
@@ -100,13 +94,16 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+if DATABASE_URL:
+    CUR_DB = dj_database_url.config(conn_max_age=600, conn_health_checks=True)
+else:
+    CUR_DB = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=DATABASE_URL,
-        conn_max_age=600,
-        conn_health_checks=True
-    )
+    'default': CUR_DB,
 }
 
 # Password validation
@@ -125,9 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-
-
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 USE_I18N = True
 USE_TZ = True
 LOCALE_PATHS = [
@@ -135,21 +130,22 @@ LOCALE_PATHS = [
 ]
 
 LANGUAGES = [
-    ('en', 'English'),
-    ('ru', 'Russian')
+    ('ru', 'Russian'),
+    # ('en', 'English'),
 ]
 
 TIME_ZONE = 'UTC'
-
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # noqa RENDER related stuff
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -168,4 +164,10 @@ LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = reverse_lazy('login')
 
-SHELL_PLUS_PRINT_SQL = True
+ROLLBAR_TOKEN = os.environ.get('ROLLBAR_TOKEN')
+ROLLBAR = {
+    'access_token': ROLLBAR_TOKEN,
+    'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}

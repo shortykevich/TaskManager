@@ -10,7 +10,6 @@ make convert-static
 make compile-locales
 
 # Apply any outstanding database migrations
-make migrations
 make migrate
 
 # Adding superuser if you have relevant env variables

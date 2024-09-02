@@ -61,6 +61,18 @@ def test_labels(db):
 
 
 @pytest.fixture
+def test_labels(db):
+    return {
+        'label1': Label.objects.create(
+            title="testlabel1"
+        ),
+        'label2': Label.objects.create(
+            title="testlabel2"
+        )
+    }
+
+
+@pytest.fixture
 def test_tasks(db, test_users, test_statuses):
     test_user1, test_user2 = test_users['user1'], test_users['user2']
     test_status1, test_status2 = test_statuses['status1'], test_statuses['status2']

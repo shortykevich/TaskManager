@@ -64,10 +64,10 @@ def test_labels(db):
 def test_labels(db):
     return {
         'label1': Label.objects.create(
-            title="testlabel1"
+            name="testlabel1"
         ),
         'label2': Label.objects.create(
-            title="testlabel2"
+            name="testlabel2"
         )
     }
 

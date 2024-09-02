@@ -39,7 +39,11 @@ def test_tasks_executor_filter(url, logged_in_client, test_tasks, test_users):
 
 @pytest.mark.django_db
 def test_tasks_combined_filter(url, logged_in_client, test_tasks, test_statuses, test_users):
-    data = {'self_tasks': 'on', 'executor': test_users['user1'].pk, 'status': test_statuses['status2'].pk}
+    data = {
+        'self_tasks': 'on',
+        'executor': test_users['user1'].pk,
+        'status': test_statuses['status2'].pk
+    }
     response = logged_in_client.get(url, data=data)
 
     assert response.status_code == 200

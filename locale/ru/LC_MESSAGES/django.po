@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-02 19:28+0000\n"
+"POT-Creation-Date: 2024-09-03 01:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,56 +25,6 @@ msgstr ""
 #: task_manager/tasks/models.py:14
 msgid "Name"
 msgstr "Имя"
-
-#: task_manager/labels/views.py:16 task_manager/labels/views.py:24
-#: task_manager/labels/views.py:33 task_manager/labels/views.py:43
-#: task_manager/statuses/views.py:16 task_manager/statuses/views.py:24
-#: task_manager/statuses/views.py:33 task_manager/statuses/views.py:43
-#: task_manager/tasks/views.py:15 task_manager/tasks/views.py:23
-#: task_manager/tasks/views.py:40 task_manager/tasks/views.py:53
-#: task_manager/tasks/views.py:64 task_manager/users/views.py:32
-#: task_manager/users/views.py:42 tests/labels_tests/test_views.py:15
-#: tests/labels_tests/test_views.py:22 tests/labels_tests/test_views.py:29
-#: tests/labels_tests/test_views.py:36 tests/statuses_tests/test_views.py:15
-#: tests/statuses_tests/test_views.py:22 tests/statuses_tests/test_views.py:29
-#: tests/statuses_tests/test_views.py:36 tests/tasks_tests/test_views.py:15
-#: tests/tasks_tests/test_views.py:22 tests/tasks_tests/test_views.py:29
-#: tests/tasks_tests/test_views.py:36 tests/users_tests/test_views.py:29
-msgid "You are not authenticated! Please login."
-msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
-
-#: task_manager/labels/views.py:25 tests/labels_tests/test_views.py:64
-msgid "Your label has been created."
-msgstr "Метка успешно создана"
-
-#: task_manager/labels/views.py:34 tests/labels_tests/test_views.py:88
-msgid "Your label has been updated."
-msgstr "Метка успешно изменена"
-
-#: task_manager/labels/views.py:42 tests/labels_tests/test_views.py:113
-#: tests/test_delete_related.py:29
-msgid "Your label has been deleted."
-msgstr "Метка успешно удалена"
-
-#: task_manager/labels/views.py:44 tests/test_delete_related.py:39
-msgid "Cannot delete a label because it is in use"
-msgstr "Невозможно удалить метку, потому что она используется"
-
-#: task_manager/statuses/views.py:25 tests/statuses_tests/test_views.py:64
-msgid "Your status has been created."
-msgstr "Статус успешно создан"
-
-#: task_manager/statuses/views.py:34 tests/statuses_tests/test_views.py:88
-msgid "Your status has been updated."
-msgstr "Статус успешно изменен"
-
-#: task_manager/statuses/views.py:42 tests/statuses_tests/test_views.py:113
-msgid "Your status has been deleted."
-msgstr "Статус успешно удален"
-
-#: task_manager/statuses/views.py:44 tests/test_delete_related.py:13
-msgid "Cannot delete a status because it is in use"
-msgstr "Невозможно удалить статус, потому что он используется"
 
 #: task_manager/tasks/forms.py:20
 msgid "Description"
@@ -103,22 +53,6 @@ msgstr "Метка"
 msgid "Only my tasks"
 msgstr "Только свои задачи"
 
-#: task_manager/tasks/views.py:39 tests/tasks_tests/test_views.py:80
-msgid "Task created successfully"
-msgstr "Задача успешно создана"
-
-#: task_manager/tasks/views.py:52
-msgid "Task updated successfully"
-msgstr "Задача успешно изменена"
-
-#: task_manager/tasks/views.py:62 tests/tasks_tests/test_views.py:110
-msgid "Task deleted successfully"
-msgstr "Задача успешно удалена"
-
-#: task_manager/tasks/views.py:63 tests/tasks_tests/test_views.py:93
-msgid "Only author can delete task"
-msgstr "Задачу может удалить только ее автор"
-
 #: task_manager/users/forms.py:16
 msgid "First Name"
 msgstr "Имя"
@@ -127,26 +61,90 @@ msgstr "Имя"
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: task_manager/users/views.py:21 tests/users_tests/test_views.py:19
-msgid "User created successfully!"
-msgstr "Пользователь успешно зарегистрирован"
+#: task_manager/utils/messages.py:5
+#: task_manager/utils/statuses_labels_mixins/common_mixins.py:18
+#: task_manager/utils/statuses_labels_mixins/common_mixins.py:21
+#: task_manager/utils/statuses_labels_mixins/common_mixins.py:24
+#: task_manager/utils/statuses_labels_mixins/common_mixins.py:27
+#: tests/labels_tests/test_views.py:15 tests/labels_tests/test_views.py:22
+#: tests/labels_tests/test_views.py:29 tests/labels_tests/test_views.py:36
+#: tests/statuses_tests/test_views.py:15 tests/statuses_tests/test_views.py:22
+#: tests/statuses_tests/test_views.py:29 tests/statuses_tests/test_views.py:36
+#: tests/tasks_tests/test_views.py:15 tests/tasks_tests/test_views.py:22
+#: tests/tasks_tests/test_views.py:29 tests/tasks_tests/test_views.py:36
+#: tests/users_tests/test_views.py:29
+msgid "You are not authenticated! Please login."
+msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/users/views.py:30 tests/users_tests/test_views.py:59
-msgid "User updated successfully!"
-msgstr "Пользователь успешно изменен"
-
-#: task_manager/users/views.py:31 task_manager/users/views.py:41
-#: tests/users_tests/test_views.py:35 tests/users_tests/test_views.py:42
+#: task_manager/utils/messages.py:6 tests/users_tests/test_views.py:35
+#: tests/users_tests/test_views.py:42
 msgid "You are not authorized to access this page."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/users/views.py:40
-msgid "User deleted successfully!"
+#: task_manager/utils/messages.py:28
+msgid "User created successfully"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/utils/messages.py:29
+msgid "User updated successfully"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/utils/messages.py:30
+msgid "User deleted successfully"
 msgstr "Пользователь успешно удален"
 
-#: task_manager/users/views.py:43 tests/test_delete_related.py:20
+#: task_manager/utils/messages.py:31 task_manager/utils/users/constants.py:5
+#: tests/test_delete_related.py:20
 msgid "Cannot delete a user because it is in use"
 msgstr "Невозможно удалить пользователя, потому что он используется"
+
+#: task_manager/utils/messages.py:35 tests/tasks_tests/test_views.py:80
+msgid "Task created successfully"
+msgstr "Задача успешно создана"
+
+#: task_manager/utils/messages.py:36
+msgid "Task updated successfully"
+msgstr "Задача успешно изменена"
+
+#: task_manager/utils/messages.py:37 tests/tasks_tests/test_views.py:110
+msgid "Task deleted successfully"
+msgstr "Задача успешно удалена"
+
+#: task_manager/utils/messages.py:41
+msgid "Status created successfully"
+msgstr "Статус успешно создан"
+
+#: task_manager/utils/messages.py:42
+msgid "Status updated successfully"
+msgstr "Статус успешно изменен"
+
+#: task_manager/utils/messages.py:43
+msgid "Status deleted successfully"
+msgstr "Статус успешно удален"
+
+#: task_manager/utils/messages.py:44 tests/test_delete_related.py:13
+msgid "Cannot delete a status because it is in use"
+msgstr "Невозможно удалить статус, потому что он используется"
+
+#: task_manager/utils/messages.py:48
+msgid "Label created successfully"
+msgstr "Метка успешно создана"
+
+#: task_manager/utils/messages.py:49
+msgid "Label updated successfully"
+msgstr "Метка успешно изменена"
+
+#: task_manager/utils/messages.py:50
+msgid "Label deleted successfully"
+msgstr "Метка успешно удалена"
+
+#: task_manager/utils/messages.py:51 tests/test_delete_related.py:39
+msgid "Cannot delete a label because it is in use"
+msgstr "Невозможно удалить метку, потому что она используется"
+
+#: task_manager/utils/users/constants.py:4 tests/users_tests/test_views.py:19
+msgid "User created successfully!"
+msgstr "Пользователь успешно зарегистрирован"
 
 #: task_manager/views.py:29 tests/test_views.py:31
 msgid "You are now logged in!"
@@ -323,3 +321,35 @@ msgstr "Дата создания"
 #: templates/users/update.html:7
 msgid "Edit user"
 msgstr "Изменение пользователя"
+
+#: tests/labels_tests/test_views.py:64
+msgid "Your label has been created."
+msgstr "Метка успешно создана"
+
+#: tests/labels_tests/test_views.py:88
+msgid "Your label has been updated."
+msgstr "Метка успешно изменена"
+
+#: tests/labels_tests/test_views.py:113 tests/test_delete_related.py:29
+msgid "Your label has been deleted."
+msgstr "Метка успешно удалена"
+
+#: tests/statuses_tests/test_views.py:64
+msgid "Your status has been created."
+msgstr "Статус успешно создан"
+
+#: tests/statuses_tests/test_views.py:88
+msgid "Your status has been updated."
+msgstr "Статус успешно изменен"
+
+#: tests/statuses_tests/test_views.py:113
+msgid "Your status has been deleted."
+msgstr "Статус успешно удален"
+
+#: tests/tasks_tests/test_views.py:93
+msgid "Only author can delete task"
+msgstr "Задачу может удалить только ее автор"
+
+#: tests/users_tests/test_views.py:59
+msgid "User updated successfully!"
+msgstr "Пользователь успешно изменен"

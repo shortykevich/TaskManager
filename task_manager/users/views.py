@@ -1,6 +1,5 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView
-from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import UpdateView, CreateView
 
 from task_manager.users.models import User
@@ -9,38 +8,48 @@ from task_manager.utils import (
     MsgSuccessMixin,
     DeleteOneToManyMixin,
     UserEditAuthMixin,
-    PermissionsMixin
+    PermissionsMixin,
+    UserMsgs
 )
 
 
-class UsersCreateView(MsgSuccessMixin, CreateView):
+class UsersCreateView(UserMsgs, MsgSuccessMixin, CreateView):
     form_class = UsersCreateForm
     template_name = 'users/create.html'
     context_object_name = 'form'
     success_url = reverse_lazy('login')
-    success_message = _('User created successfully!')
+
+    def __init__(self, *args, **kwargs):
+        self.success_message = self.get_created_msg()
+        super().__init__(*args, **kwargs)
 
 
-class UsersUpdateView(UserEditAuthMixin, PermissionsMixin, MsgSuccessMixin, UpdateView):
+class UsersUpdateView(UserMsgs, UserEditAuthMixin, PermissionsMixin, MsgSuccessMixin, UpdateView):
     model = User
     form_class = UsersUpdateForm
     template_name = 'users/update.html'
     context_object_name = 'user'
     success_url = reverse_lazy('users_index')
-    success_message = _('User updated successfully!')
-    not_authorized = _('You are not authorized to access this page.')
-    not_authenticated = _('You are not authenticated! Please login.')
+
+    def __init__(self, *args, **kwargs):
+        self.success_message = self.get_updated_msg()
+        self.not_authorized = self.get_not_authorized_msg()
+        self.not_authenticated = self.get_not_authenticated_msg()
+        super().__init__(*args, **kwargs)
 
 
-class UsersDeleteView(UserEditAuthMixin, PermissionsMixin, DeleteOneToManyMixin):
+class UsersDeleteView(UserMsgs, UserEditAuthMixin, PermissionsMixin, DeleteOneToManyMixin):
     model = User
     template_name = 'users/delete.html'
     context_object_name = 'user'
     success_url = reverse_lazy('users_index')
-    success_message = _('User deleted successfully!')
-    not_authorized = _('You are not authorized to access this page.')
-    not_authenticated = _('You are not authenticated! Please login.')
-    error_message = _('Cannot delete a user because it is in use')
+
+    def __init__(self, *args, **kwargs):
+        self.success_message = self.get_deleted_msg()
+        self.not_authorized = self.get_not_authorized_msg()
+        self.not_authenticated = self.get_not_authenticated_msg()
+        self.error_message = self.get_error_msg()
+        super().__init__(*args, **kwargs)
 
 
 class UsersIndexView(ListView):

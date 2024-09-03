@@ -19,9 +19,6 @@ convert-static:
 tests-coverage:
 	poetry run coverage run -m pytest
 
-format-coverage:
-	poetry run coverage lcov -o lcov.info
-
 coverage-report:
 	poetry run coverage report -m
 

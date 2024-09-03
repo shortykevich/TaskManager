@@ -6,16 +6,29 @@ from task_manager.utils.messages_mixins import MsgSuccessMixin
 
 class BaseIndexView(DirectAccessDenialMixin, ListView):
     ordering = 'pk'
-    pass
+
+    def __init__(self, *args, **kwargs):
+        self.not_authenticated = self.get_not_authenticated_msg()
+        super().__init__(*args, **kwargs)
 
 
 class BaseCreateView(DirectAccessDenialMixin, MsgSuccessMixin, CreateView):
-    pass
+    def __init__(self, *args, **kwargs):
+        self.not_authenticated = self.get_not_authenticated_msg()
+        self.success_message = self.get_created_msg()
+        super().__init__(*args, **kwargs)
 
 
 class BaseUpdateView(DirectAccessDenialMixin, MsgSuccessMixin, UpdateView):
-    pass
+    def __init__(self, *args, **kwargs):
+        self.not_authenticated = self.get_not_authenticated_msg()
+        self.success_message = self.get_updated_msg()
+        super().__init__(*args, **kwargs)
 
 
 class BaseDeleteView(DirectAccessDenialMixin):
-    pass
+    def __init__(self, *args, **kwargs):
+        self.not_authenticated = self.get_not_authenticated_msg()
+        self.success_message = self.get_deleted_msg()
+        self.error_message = self.get_error_msg()
+        super().__init__(*args, **kwargs)

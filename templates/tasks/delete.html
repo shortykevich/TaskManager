@@ -4,8 +4,8 @@
 
 {% block main %}
 	<h1 class="my-4">{% trans "Deleting the task" %}</h1>
-    <p>{% trans "Are you sure you want to delete" %} {{ task.name }}?</p>
-    <form method="post" action="{% url 'tasks_delete' task.pk %}">
+    <p>{% trans "Are you sure you want to delete" %} {{ tasks.name }}?</p>
+    <form method="post" action="{% url 'tasks_delete' tasks.pk %}">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="{% trans "Yes, delete"%}">
     </form>

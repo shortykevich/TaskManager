@@ -1,30 +1,25 @@
-from django.urls import reverse_lazy
-from django_filters.views import FilterView
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-
 from task_manager.tasks.forms import TaskForm, TaskFilter
 from task_manager.tasks.models import Task
-from task_manager.utils import (
-    DirectAccessDenialMixin,
-    MsgSuccessMixin,
-    PermissionsMixin,
-    TaskMsgs
+from task_manager.core.tasks.bases import (
+    BaseTasksDetailView,
+    BaseTasksFilterView,
+    BaseTasksCreateView,
+    BaseTasksUpdateView,
+    BaseTasksDeleteView
 )
 
 
-class TasksDetailView(TaskMsgs, DirectAccessDenialMixin, DetailView):
+class BaseTasksView:
     model = Task
-    context_object_name = 'task'
-    template_name = 'tasks/task_page.html'
-    not_authenticated = TaskMsgs.not_authenticated()
+    object_name = 'Tasks'
 
 
-class TasksIndexView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, FilterView):
-    model = Task
+class TasksDetailView(BaseTasksView, BaseTasksDetailView):
+    pass
+
+
+class TasksIndexView(BaseTasksView, BaseTasksFilterView):
     filterset_class = TaskFilter
-    context_object_name = 'tasks'
-    template_name = 'tasks/index.html'
-    not_authenticated = TaskMsgs.not_authenticated()
 
     def get_filterset(self, filterset_class=None):
         filterset_class = self.get_filterset_class()
@@ -35,37 +30,24 @@ class TasksIndexView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, FilterV
         )
 
 
-class TasksCreateView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, CreateView):
-    model = Task
+class TasksCreateView(BaseTasksView, BaseTasksCreateView):
     form_class = TaskForm
-    template_name = 'tasks/create.html'
-    success_url = reverse_lazy('tasks_index')
-    not_authenticated = TaskMsgs.not_authenticated()
-    success_message = TaskMsgs.created()
+    success_url_name = 'tasks_index'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class TasksUpdateView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, UpdateView):
+class TasksUpdateView(BaseTasksView, BaseTasksUpdateView):
     model = Task
     form_class = TaskForm
-    template_name = 'tasks/update.html'
-    success_url = reverse_lazy('tasks_index')
-    not_authenticated = TaskMsgs.not_authenticated()
-    success_message = TaskMsgs.updated()
+    success_url_name = 'tasks_index'
 
 
-class TasksDeleteView(TaskMsgs, PermissionsMixin, MsgSuccessMixin, DeleteView):
-    model = Task
-    context_object_name = 'task'
+class TasksDeleteView(BaseTasksView, BaseTasksDeleteView):
     redirect_field_name = None
-    template_name = 'tasks/delete.html'
-    success_url = reverse_lazy('tasks_index')
-    not_authenticated = TaskMsgs.not_authenticated()
-    not_authorized = TaskMsgs.not_authorized()
-    success_message = TaskMsgs.deleted()
+    success_url_name = 'tasks_index'
 
     def test_func(self):
         task = self.get_object()

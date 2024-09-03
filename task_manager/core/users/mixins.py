@@ -1,11 +1,9 @@
-from django.shortcuts import get_object_or_404
-
 from task_manager.users.models import User
 
 
-class UserEditAuthMixin:
+class UserAuthMixin:
     redirect_field_name = None
 
     def test_func(self):
-        user = get_object_or_404(User, pk=self.kwargs['pk'])
+        user = User.objects.filter(pk=self.kwargs['pk'])[0]
         return self.request.user == user or self.request.user.is_superuser

@@ -51,7 +51,7 @@ def test_tasks_detail(logged_in_client, test_tasks, test_users):
     response = logged_in_client.get(url)
 
     assert response.status_code == 200
-    assert 'tasks/task_page.html' in response.template_name
+    assert 'tasks/detail.html' in response.template_name
 
 
 @pytest.mark.django_db

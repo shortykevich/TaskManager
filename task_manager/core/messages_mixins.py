@@ -1,5 +1,5 @@
-from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
 
 class MsgSuccessMixin:
@@ -9,7 +9,6 @@ class MsgSuccessMixin:
 
 
 class BaseMessages:
-
     @classmethod
     def _get_message(cls, action):
         msgs = {

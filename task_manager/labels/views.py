@@ -1,11 +1,11 @@
 from task_manager.labels.forms import LabelForm
 from task_manager.labels.models import Label
-from task_manager.utils import (
-    DeleteManyToManyMixin,
-    BaseIndexView,
-    BaseCreateView,
-    BaseUpdateView,
-    BaseDeleteView
+from task_manager.core.related_deletion_mixins import DeleteManyToManyMixin
+from task_manager.core.statuses_labels.bases import (
+    BaseStLbIndexView,
+    BaseStLbCreateView,
+    BaseStLbUpdateView,
+    BaseStLbDeleteView
 )
 
 
@@ -15,17 +15,17 @@ class BaseLabelView:
     success_url_name = 'labels_index'
 
 
-class LabelsIndexView(BaseLabelView, BaseIndexView):
+class LabelsIndexView(BaseLabelView, BaseStLbIndexView):
     queryset = Label.objects.all()
 
 
-class LabelsCreateView(BaseLabelView, BaseCreateView):
+class LabelsCreateView(BaseLabelView, BaseStLbCreateView):
     form_class = LabelForm
 
 
-class LabelsUpdateView(BaseLabelView, BaseUpdateView):
+class LabelsUpdateView(BaseLabelView, BaseStLbUpdateView):
     form_class = LabelForm
 
 
-class LabelsDeleteView(BaseLabelView, BaseDeleteView, DeleteManyToManyMixin):
+class LabelsDeleteView(BaseLabelView, BaseStLbDeleteView, DeleteManyToManyMixin):
     pass

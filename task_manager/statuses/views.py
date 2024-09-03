@@ -1,11 +1,11 @@
 from task_manager.statuses.forms import StatusForm
 from task_manager.statuses.models import Status
-from task_manager.utils import (
-    DeleteOneToManyMixin,
-    BaseIndexView,
-    BaseCreateView,
-    BaseUpdateView,
-    BaseDeleteView
+from task_manager.core.related_deletion_mixins import DeleteOneToManyMixin
+from task_manager.core.statuses_labels.bases import (
+    BaseStLbIndexView,
+    BaseStLbCreateView,
+    BaseStLbUpdateView,
+    BaseStLbDeleteView
 )
 
 
@@ -15,17 +15,17 @@ class BaseStatusView:
     success_url_name = 'statuses_index'
 
 
-class StatusesIndexView(BaseStatusView, BaseIndexView):
+class StatusesIndexView(BaseStatusView, BaseStLbIndexView):
     queryset = Status.objects.all()
 
 
-class StatusesCreateView(BaseStatusView, BaseCreateView):
+class StatusesCreateView(BaseStatusView, BaseStLbCreateView):
     form_class = StatusForm
 
 
-class StatusesUpdateView(BaseStatusView, BaseUpdateView):
+class StatusesUpdateView(BaseStatusView, BaseStLbUpdateView):
     form_class = StatusForm
 
 
-class StatusesDeleteView(BaseStatusView, BaseDeleteView, DeleteOneToManyMixin):
+class StatusesDeleteView(BaseStatusView, BaseStLbDeleteView, DeleteOneToManyMixin):
     pass

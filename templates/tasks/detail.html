@@ -6,27 +6,27 @@
     <h1 class="my-4">{% trans "Task overview" %}</h1>
 <div class="card">
   <div class="card-header bg-secondary text-white">
-    <h2>{{ task.name }}</h2>
+    <h2>{{ tasks.name }}</h2>
   </div>
   <div class="card-body bg-light">
-    <p>{{ task.description }}</p>
+    <p>{{ tasks.description }}</p>
     <hr>
     <div class="container">
       <div class="row p-1">
         <div class="col">{% trans "Author" %}</div>
-        <div class="col">{{ task.author.first_name }} {{ task.author.last_name }}</div>
+        <div class="col">{{ tasks.author.first_name }} {{ tasks.author.last_name }}</div>
       </div>
       <div class="row p-1">
         <div class="col">{% trans "Executor" %}</div>
-        <div class="col">{{ task.executor.first_name }} {{ task.executor.last_name }}</div>
+        <div class="col">{{ tasks.executor.first_name }} {{ tasks.executor.last_name }}</div>
       </div>
       <div class="row p-1">
         <div class="col">{% trans "Status" %}</div>
-        <div class="col">{{ task.status.name }}</div>
+        <div class="col">{{ tasks.status.name }}</div>
       </div>
       <div class="row p-1">
         <div class="col">{% trans "Creation date" %}</div>
-          {% with created=task.created_at %}
+          {% with created=tasks.created_at %}
             <div class="col">{{ created|date:"d.m.Y" }} {{ created|time }}</div>
           {% endwith %}
       </div>
@@ -34,7 +34,7 @@
         <div class="col">
           <h6>{% trans "Labels" %}:</h6>
           <ul>
-              {% for label in task.labels.all %}
+              {% for label in tasks.labels.all %}
                   <li>{{ label.name }}</li>
               {% endfor %}
           </ul>
@@ -42,9 +42,9 @@
       </div>
       <div class="row p-1">
         <div class="col">
-          <a href="{% url "tasks_update" task.pk %}">Изменить</a>
+          <a href="{% url "tasks_update" tasks.pk %}">Изменить</a>
           <br>
-          <a href="{% url "tasks_delete" task.pk %}">Удалить</a>
+          <a href="{% url "tasks_delete" tasks.pk %}">Удалить</a>
         </div>
       </div>
     </div>

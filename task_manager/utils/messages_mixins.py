@@ -9,6 +9,36 @@ class MsgSuccessMixin:
 
 
 class BaseMessages:
+
+    @classmethod
+    def _get_message(cls, action):
+        msgs = {
+            'UserMsgs': {
+                'created': _('User created successfully'),
+                'updated': _('User updated successfully'),
+                'deleted': _('User deleted successfully'),
+                'error': _('Cannot delete a user because it is in use'),
+            },
+            'TaskMsgs': {
+                'created': _('Task created successfully'),
+                'updated': _('Task updated successfully'),
+                'deleted': _('Task deleted successfully'),
+            },
+            'StatusMsgs': {
+                'created': _('Status created successfully'),
+                'updated': _('Status updated successfully'),
+                'deleted': _('Status deleted successfully'),
+                'error': _('Cannot delete a status because it is in use'),
+            },
+            'LabelMsgs': {
+                'created': _('Label created successfully'),
+                'updated': _('Label updated successfully'),
+                'deleted': _('Label deleted successfully'),
+                'error': _('Cannot delete a label because it is in use'),
+            }
+        }
+        return msgs.get(cls.__name__).get(action)
+
     @staticmethod
     def not_authenticated():
         return _('You are not authenticated! Please login.')
@@ -17,90 +47,36 @@ class BaseMessages:
     def not_authorized():
         return _('You are not authorized to access this page.')
 
-    @staticmethod
-    def created():
-        pass
+    @classmethod
+    def created(cls):
+        return cls._get_message('created')
 
-    @staticmethod
-    def updated():
-        pass
+    @classmethod
+    def updated(cls):
+        return cls._get_message('updated')
 
-    @staticmethod
-    def deleted():
-        pass
+    @classmethod
+    def deleted(cls):
+        return cls._get_message('deleted')
 
-    @staticmethod
-    def error():
-        pass
-
-
-class UserMsgs(BaseMessages):
-    @staticmethod
-    def created():
-        return _('User created successfully')
-
-    @staticmethod
-    def updated():
-        return _('User updated successfully')
-
-    @staticmethod
-    def deleted():
-        return _('User deleted successfully')
-
-    @staticmethod
-    def error():
-        return _('Cannot delete a user because it is in use')
+    @classmethod
+    def error(cls):
+        return cls._get_message('error')
 
 
 class TaskMsgs(BaseMessages):
     @staticmethod
     def not_authorized():
-        return _('Only author can delete task')
+        return _('Only the author can delete a task')
 
-    @staticmethod
-    def created():
-        return _('Task created successfully')
 
-    @staticmethod
-    def updated():
-        return _('Task updated successfully')
-
-    @staticmethod
-    def deleted():
-        return _('Task deleted successfully')
+class UserMsgs(BaseMessages):
+    pass
 
 
 class StatusMsgs(BaseMessages):
-    @staticmethod
-    def created():
-        return _('Status created successfully')
-
-    @staticmethod
-    def updated():
-        return _('Status updated successfully')
-
-    @staticmethod
-    def deleted():
-        return _('Status deleted successfully')
-
-    @staticmethod
-    def error():
-        return _('Cannot delete a status because it is in use')
+    pass
 
 
 class LabelMsgs(BaseMessages):
-    @staticmethod
-    def created():
-        return _('Label created successfully')
-
-    @staticmethod
-    def updated():
-        return _('Label updated successfully')
-
-    @staticmethod
-    def deleted():
-        return _('Label deleted successfully')
-
-    @staticmethod
-    def error():
-        return _('Cannot delete a label because it is in use')
+    pass

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-03 08:31+0000\n"
+"POT-Creation-Date: 2024-09-03 09:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,67 @@ msgstr "Имя"
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: task_manager/utils/messages_mixins.py:14 tests/labels_tests/test_views.py:15
+#: task_manager/utils/messages_mixins.py:17
+msgid "User created successfully"
+msgstr "Пользователь успешно зарегистрирован"
+
+#: task_manager/utils/messages_mixins.py:18
+msgid "User updated successfully"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/utils/messages_mixins.py:19
+msgid "User deleted successfully"
+msgstr "Пользователь успешно удален"
+
+#: task_manager/utils/messages_mixins.py:20 tests/test_delete_related.py:20
+msgid "Cannot delete a user because it is in use"
+msgstr "Невозможно удалить пользователя, потому что он используется"
+
+#: task_manager/utils/messages_mixins.py:23 tests/tasks_tests/test_views.py:80
+msgid "Task created successfully"
+msgstr "Задача успешно создана"
+
+#: task_manager/utils/messages_mixins.py:24
+msgid "Task updated successfully"
+msgstr "Задача успешно изменена"
+
+#: task_manager/utils/messages_mixins.py:25 tests/tasks_tests/test_views.py:110
+msgid "Task deleted successfully"
+msgstr "Задача успешно удалена"
+
+#: task_manager/utils/messages_mixins.py:28
+msgid "Status created successfully"
+msgstr "Статус успешно создан"
+
+#: task_manager/utils/messages_mixins.py:29
+msgid "Status updated successfully"
+msgstr "Статус успешно изменен"
+
+#: task_manager/utils/messages_mixins.py:30
+msgid "Status deleted successfully"
+msgstr "Статус успешно удален"
+
+#: task_manager/utils/messages_mixins.py:31 tests/test_delete_related.py:13
+msgid "Cannot delete a status because it is in use"
+msgstr "Невозможно удалить статус, потому что он используется"
+
+#: task_manager/utils/messages_mixins.py:34
+msgid "Label created successfully"
+msgstr "Метка успешно создана"
+
+#: task_manager/utils/messages_mixins.py:35
+msgid "Label updated successfully"
+msgstr "Метка успешно изменена"
+
+#: task_manager/utils/messages_mixins.py:36
+msgid "Label deleted successfully"
+msgstr "Метка успешно удалена"
+
+#: task_manager/utils/messages_mixins.py:37 tests/test_delete_related.py:39
+msgid "Cannot delete a label because it is in use"
+msgstr "Невозможно удалить метку, потому что она используется"
+
+#: task_manager/utils/messages_mixins.py:44 tests/labels_tests/test_views.py:15
 #: tests/labels_tests/test_views.py:22 tests/labels_tests/test_views.py:29
 #: tests/labels_tests/test_views.py:36 tests/statuses_tests/test_views.py:15
 #: tests/statuses_tests/test_views.py:22 tests/statuses_tests/test_views.py:29
@@ -71,74 +131,18 @@ msgstr "Фамилия"
 msgid "You are not authenticated! Please login."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
-#: task_manager/utils/messages_mixins.py:18 tests/users_tests/test_views.py:35
+#: task_manager/utils/messages_mixins.py:48 tests/users_tests/test_views.py:35
 #: tests/users_tests/test_views.py:42
 msgid "You are not authorized to access this page."
 msgstr "У вас нет прав для изменения другого пользователя."
 
-#: task_manager/utils/messages_mixins.py:40
-msgid "User created successfully"
-msgstr "Пользователь успешно зарегистрирован"
+#: task_manager/utils/messages_mixins.py:64
+msgid "An error occurred"
+msgstr ""
 
-#: task_manager/utils/messages_mixins.py:44
-msgid "User updated successfully"
-msgstr "Пользователь успешно изменен"
-
-#: task_manager/utils/messages_mixins.py:48
-msgid "User deleted successfully"
-msgstr "Пользователь успешно удален"
-
-#: task_manager/utils/messages_mixins.py:52 tests/test_delete_related.py:20
-msgid "Cannot delete a user because it is in use"
-msgstr "Невозможно удалить пользователя, потому что он используется"
-
-#: task_manager/utils/messages_mixins.py:58 tests/tasks_tests/test_views.py:93
-msgid "Only author can delete task"
+#: task_manager/utils/messages_mixins.py:70
+msgid "Only the author can delete a task"
 msgstr "Задачу может удалить только ее автор"
-
-#: task_manager/utils/messages_mixins.py:62 tests/tasks_tests/test_views.py:80
-msgid "Task created successfully"
-msgstr "Задача успешно создана"
-
-#: task_manager/utils/messages_mixins.py:66
-msgid "Task updated successfully"
-msgstr "Задача успешно изменена"
-
-#: task_manager/utils/messages_mixins.py:70 tests/tasks_tests/test_views.py:110
-msgid "Task deleted successfully"
-msgstr "Задача успешно удалена"
-
-#: task_manager/utils/messages_mixins.py:76
-msgid "Status created successfully"
-msgstr "Статус успешно создан"
-
-#: task_manager/utils/messages_mixins.py:80
-msgid "Status updated successfully"
-msgstr "Статус успешно изменен"
-
-#: task_manager/utils/messages_mixins.py:84
-msgid "Status deleted successfully"
-msgstr "Статус успешно удален"
-
-#: task_manager/utils/messages_mixins.py:88 tests/test_delete_related.py:13
-msgid "Cannot delete a status because it is in use"
-msgstr "Невозможно удалить статус, потому что он используется"
-
-#: task_manager/utils/messages_mixins.py:94
-msgid "Label created successfully"
-msgstr "Метка успешно создана"
-
-#: task_manager/utils/messages_mixins.py:98
-msgid "Label updated successfully"
-msgstr "Метка успешно изменена"
-
-#: task_manager/utils/messages_mixins.py:102
-msgid "Label deleted successfully"
-msgstr "Метка успешно удалена"
-
-#: task_manager/utils/messages_mixins.py:106 tests/test_delete_related.py:39
-msgid "Cannot delete a label because it is in use"
-msgstr "Невозможно удалить метку, потому что она используется"
 
 #: task_manager/views.py:29 tests/test_views.py:31
 msgid "You are now logged in!"
@@ -339,6 +343,10 @@ msgstr "Статус успешно изменен"
 #: tests/statuses_tests/test_views.py:113
 msgid "Your status has been deleted."
 msgstr "Статус успешно удален"
+
+#: tests/tasks_tests/test_views.py:93
+msgid "Only author can delete task"
+msgstr "Задачу может удалить только ее автор"
 
 #: tests/users_tests/test_views.py:19
 msgid "User created successfully!"

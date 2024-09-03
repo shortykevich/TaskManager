@@ -10,9 +10,9 @@ from task_manager.utils.statuses_labels_mixins.common import (
 )
 from task_manager.utils.messages_mixins import (
     UserMsgs,
-    StatusMessages,
-    LabelMessages,
-    TaskMessages,
+    StatusMsgs,
+    LabelMsgs,
+    TaskMsgs,
     MsgSuccessMixin
 )
 
@@ -29,7 +29,7 @@ __all__ = [
     'BaseCreateView',
     'BaseUpdateView',
     'UserMsgs',
-    'StatusMessages',
-    'LabelMessages',
-    'TaskMessages',
+    'StatusMsgs',
+    'LabelMsgs',
+    'TaskMsgs',
 ]

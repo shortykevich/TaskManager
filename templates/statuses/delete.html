@@ -4,8 +4,8 @@
 
 {% block main %}
 	<h1 class="my-4">{% trans "Deleting the status" %}</h1>
-    <p>{% trans "Are you sure you want to delete" %} {{ status.name }}?</p>
-    <form method="post" action="{% url 'statuses_delete' status.pk %}">
+    <p>{% trans "Are you sure you want to delete" %} {{ statuses.name }}?</p>
+    <form method="post" action="{% url 'statuses_delete' statuses.pk %}">
         {% csrf_token %}
         <input class="btn btn-danger" type="submit" value="{% trans "Yes, delete"%}">
     </form>

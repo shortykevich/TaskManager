@@ -20,7 +20,7 @@ class UsersCreateView(UserMsgs, MsgSuccessMixin, CreateView):
     success_url = reverse_lazy('login')
 
     def __init__(self, *args, **kwargs):
-        self.success_message = self.get_created_msg()
+        self.success_message = UserMsgs.created()
         super().__init__(*args, **kwargs)
 
 
@@ -30,12 +30,9 @@ class UsersUpdateView(UserMsgs, UserEditAuthMixin, PermissionsMixin, MsgSuccessM
     template_name = 'users/update.html'
     context_object_name = 'user'
     success_url = reverse_lazy('users_index')
-
-    def __init__(self, *args, **kwargs):
-        self.success_message = self.get_updated_msg()
-        self.not_authorized = self.get_not_authorized_msg()
-        self.not_authenticated = self.get_not_authenticated_msg()
-        super().__init__(*args, **kwargs)
+    success_message = UserMsgs.updated()
+    not_authorized = UserMsgs.not_authorized()
+    not_authenticated = UserMsgs.not_authenticated()
 
 
 class UsersDeleteView(UserMsgs, UserEditAuthMixin, PermissionsMixin, DeleteOneToManyMixin):
@@ -43,13 +40,10 @@ class UsersDeleteView(UserMsgs, UserEditAuthMixin, PermissionsMixin, DeleteOneTo
     template_name = 'users/delete.html'
     context_object_name = 'user'
     success_url = reverse_lazy('users_index')
-
-    def __init__(self, *args, **kwargs):
-        self.success_message = self.get_deleted_msg()
-        self.not_authorized = self.get_not_authorized_msg()
-        self.not_authenticated = self.get_not_authenticated_msg()
-        self.error_message = self.get_error_msg()
-        super().__init__(*args, **kwargs)
+    success_message = UserMsgs.deleted()
+    not_authorized = UserMsgs.not_authorized()
+    not_authenticated = UserMsgs.not_authenticated()
+    error_message = UserMsgs.error()
 
 
 class UsersIndexView(ListView):

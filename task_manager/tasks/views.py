@@ -8,29 +8,23 @@ from task_manager.utils import (
     DirectAccessDenialMixin,
     MsgSuccessMixin,
     PermissionsMixin,
-    TaskMessages
+    TaskMsgs
 )
 
 
-class TasksDetailView(TaskMessages, DirectAccessDenialMixin, DetailView):
+class TasksDetailView(TaskMsgs, DirectAccessDenialMixin, DetailView):
     model = Task
     context_object_name = 'task'
     template_name = 'tasks/task_page.html'
-
-    def __init__(self, *args, **kwargs):
-        self.not_authenticated = self.get_not_authenticated_msg()
-        super().__init__(*args, **kwargs)
+    not_authenticated = TaskMsgs.not_authenticated()
 
 
-class TasksIndexView(TaskMessages, DirectAccessDenialMixin, MsgSuccessMixin, FilterView):
+class TasksIndexView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, FilterView):
     model = Task
     filterset_class = TaskFilter
     context_object_name = 'tasks'
     template_name = 'tasks/index.html'
-
-    def __init__(self, *args, **kwargs):
-        self.not_authenticated = self.get_not_authenticated_msg()
-        super().__init__(*args, **kwargs)
+    not_authenticated = TaskMsgs.not_authenticated()
 
     def get_filterset(self, filterset_class=None):
         filterset_class = self.get_filterset_class()
@@ -41,46 +35,37 @@ class TasksIndexView(TaskMessages, DirectAccessDenialMixin, MsgSuccessMixin, Fil
         )
 
 
-class TasksCreateView(TaskMessages, DirectAccessDenialMixin, MsgSuccessMixin, CreateView):
+class TasksCreateView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create.html'
     success_url = reverse_lazy('tasks_index')
-
-    def __init__(self, *args, **kwargs):
-        self.not_authenticated = self.get_not_authenticated_msg()
-        self.success_message = self.get_created_msg()
-        super().__init__(*args, **kwargs)
+    not_authenticated = TaskMsgs.not_authenticated()
+    success_message = TaskMsgs.created()
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class TasksUpdateView(TaskMessages, DirectAccessDenialMixin, MsgSuccessMixin, UpdateView):
+class TasksUpdateView(TaskMsgs, DirectAccessDenialMixin, MsgSuccessMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/update.html'
     success_url = reverse_lazy('tasks_index')
-
-    def __init__(self, *args, **kwargs):
-        self.not_authenticated = self.get_not_authenticated_msg()
-        self.success_message = self.get_updated_msg()
-        super().__init__(*args, **kwargs)
+    not_authenticated = TaskMsgs.not_authenticated()
+    success_message = TaskMsgs.updated()
 
 
-class TasksDeleteView(TaskMessages, PermissionsMixin, MsgSuccessMixin, DeleteView):
+class TasksDeleteView(TaskMsgs, PermissionsMixin, MsgSuccessMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     redirect_field_name = None
     template_name = 'tasks/delete.html'
     success_url = reverse_lazy('tasks_index')
-
-    def __init__(self, *args, **kwargs):
-        self.not_authenticated = self.get_not_authenticated_msg()
-        self.not_authorized = self.get_not_authorized_msg()
-        self.success_message = self.get_deleted_msg()
-        super().__init__(*args, **kwargs)
+    not_authenticated = TaskMsgs.not_authenticated()
+    not_authorized = TaskMsgs.not_authorized()
+    success_message = TaskMsgs.deleted()
 
     def test_func(self):
         task = self.get_object()

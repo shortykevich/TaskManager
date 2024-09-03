@@ -27,5 +27,5 @@ class StatusesUpdateView(BaseStatusView, BaseStLbUpdateView):
     form_class = StatusForm
 
 
-class StatusesDeleteView(BaseStatusView, BaseStLbDeleteView, DeleteOneToManyMixin):
+class StatusesDeleteView(BaseStatusView, DeleteOneToManyMixin, BaseStLbDeleteView):
     pass

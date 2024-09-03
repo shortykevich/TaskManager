@@ -1,10 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import redirect
-from django.views.generic import DeleteView
 from django.db.models.deletion import ProtectedError
 
 
-class DeleteOneToManyMixin(DeleteView):
+class DeleteOneToManyMixin:
     def form_valid(self, form):
         try:
             super().form_valid(form)

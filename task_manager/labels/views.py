@@ -27,5 +27,5 @@ class LabelsUpdateView(BaseLabelView, BaseStLbUpdateView):
     form_class = LabelForm
 
 
-class LabelsDeleteView(BaseLabelView, BaseStLbDeleteView, DeleteManyToManyMixin):
+class LabelsDeleteView(BaseLabelView, DeleteManyToManyMixin, BaseStLbDeleteView):
     pass

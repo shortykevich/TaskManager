@@ -96,7 +96,7 @@ class BaseUpdateView(DirectAccessDenialMixin, BaseObjectView, MsgSuccessMixin, U
         self.template_name = f'{self.object_name.lower()}/update.html'
 
 
-class BaseDeleteView(DirectAccessDenialMixin, BaseObjectView, MsgSuccessMixin, DeleteView):
+class BaseDeleteView(DirectAccessDenialMixin, BaseObjectView, DeleteView):
     def __init__(self):
         super().__init__()
         self.template_name = f'{self.object_name.lower()}/delete.html'

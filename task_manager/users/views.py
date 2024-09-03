@@ -29,5 +29,5 @@ class UsersUpdateView(BaseUserView, BaseUsersUpdateView):
     success_url_name = 'users_index'
 
 
-class UsersDeleteView(BaseUserView, BaseUsersDeleteView, DeleteOneToManyMixin):
+class UsersDeleteView(BaseUserView, DeleteOneToManyMixin, BaseUsersDeleteView):
     success_url_name = 'users_index'

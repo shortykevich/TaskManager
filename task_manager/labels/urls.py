@@ -1,11 +1,5 @@
-from django.urls import path
-
 from task_manager.labels import views
+from task_manager.core.urls_dispatcher.dispatcher import generate_crud_urls
 
 
-urlpatterns = [
-    path('', views.LabelsIndexView.as_view(), name='labels_index'),
-    path('create/', views.LabelsCreateView.as_view(), name='labels_create'),
-    path('<int:pk>/update/', views.LabelsUpdateView.as_view(), name='labels_update'),
-    path('<int:pk>/delete/', views.LabelsDeleteView.as_view(), name='labels_delete'),
-]
+urlpatterns = generate_crud_urls(views, 'labels')

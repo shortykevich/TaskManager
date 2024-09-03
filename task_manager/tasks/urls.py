@@ -1,12 +1,11 @@
 from django.urls import path
 
 from task_manager.tasks import views
+from task_manager.core.urls_dispatcher.dispatcher import generate_crud_urls
 
 
-urlpatterns = [
-    path('', views.TasksIndexView.as_view(), name='tasks_index'),
-    path('create/', views.TasksCreateView.as_view(), name='tasks_create'),
-    path('<int:pk>/', views.TasksDetailView.as_view(), name='tasks_detail'),
-    path('<int:pk>/update/', views.TasksUpdateView.as_view(), name='tasks_update'),
-    path('<int:pk>/delete/', views.TasksDeleteView.as_view(), name='tasks_delete'),
+urlpatterns = generate_crud_urls(views, 'tasks')
+
+urlpatterns += [
+    path('<int:pk>', views.TasksDetailView.as_view(), name='tasks_detail'),
 ]

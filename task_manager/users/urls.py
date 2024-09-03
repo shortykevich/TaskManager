@@ -1,11 +1,5 @@
-from django.urls import path
-
 from task_manager.users import views
+from task_manager.core.urls_dispatcher.dispatcher import generate_crud_urls
 
 
-urlpatterns = [
-    path('', views.UsersIndexView.as_view(), name='users_index'),
-    path('create/', views.UsersCreateView.as_view(), name='users_create'),
-    path('<int:pk>/update/', views.UsersUpdateView.as_view(), name='users_update'),
-    path('<int:pk>/delete/', views.UsersDeleteView.as_view(), name='users_delete'),
-]
+urlpatterns = generate_crud_urls(views, 'users')

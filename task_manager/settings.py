@@ -36,7 +36,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'webserver', 'onrender.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'webserver', 'task-manager-ndp1.onrender.com']
 
 # Application definition
 

@@ -5,7 +5,7 @@ migrations:
 	poetry run python manage.py makemigrations
 
 migrate:
-	poetry run python manage.py migrate --fake
+	poetry run python manage.py migrate
 
 build-locales:
 	poetry run python manage.py makemessages -l ru

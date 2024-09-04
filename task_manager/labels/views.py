@@ -1,31 +1,9 @@
-from task_manager.labels.forms import LabelForm
-from task_manager.labels.models import Label
-from task_manager.core.related_deletion_mixins import DeleteManyToManyMixin
-from task_manager.core.statuses_labels.bases import (
-    BaseStLbIndexView,
-    BaseStLbCreateView,
-    BaseStLbUpdateView,
-    BaseStLbDeleteView
-)
+from task_manager.core.statuses_labels.views_bases import ViewsFactory
 
 
-class BaseLabelView:
-    model = Label
-    object_name = 'Labels'
-    success_url_name = 'labels_index'
+LabelsViews = ViewsFactory('Label')
 
-
-class LabelsIndexView(BaseLabelView, BaseStLbIndexView):
-    queryset = Label.objects.all()
-
-
-class LabelsCreateView(BaseLabelView, BaseStLbCreateView):
-    form_class = LabelForm
-
-
-class LabelsUpdateView(BaseLabelView, BaseStLbUpdateView):
-    form_class = LabelForm
-
-
-class LabelsDeleteView(BaseLabelView, DeleteManyToManyMixin, BaseStLbDeleteView):
-    pass
+LabelsIndexView = LabelsViews.get_index_view()
+LabelsCreateView = LabelsViews.get_create_view()
+LabelsUpdateView = LabelsViews.get_update_view()
+LabelsDeleteView = LabelsViews.get_delete_view()

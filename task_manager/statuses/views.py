@@ -1,31 +1,9 @@
-from task_manager.statuses.forms import StatusForm
-from task_manager.statuses.models import Status
-from task_manager.core.related_deletion_mixins import DeleteOneToManyMixin
-from task_manager.core.statuses_labels.bases import (
-    BaseStLbIndexView,
-    BaseStLbCreateView,
-    BaseStLbUpdateView,
-    BaseStLbDeleteView
-)
+from task_manager.core.statuses_labels.views_bases import ViewsFactory
 
 
-class BaseStatusView:
-    model = Status
-    object_name = 'Statuses'
-    success_url_name = 'statuses_index'
+StatusViews = ViewsFactory('Status')
 
-
-class StatusesIndexView(BaseStatusView, BaseStLbIndexView):
-    queryset = Status.objects.all()
-
-
-class StatusesCreateView(BaseStatusView, BaseStLbCreateView):
-    form_class = StatusForm
-
-
-class StatusesUpdateView(BaseStatusView, BaseStLbUpdateView):
-    form_class = StatusForm
-
-
-class StatusesDeleteView(BaseStatusView, DeleteOneToManyMixin, BaseStLbDeleteView):
-    pass
+StatusesIndexView = StatusViews.get_index_view()
+StatusesCreateView = StatusViews.get_create_view()
+StatusesUpdateView = StatusViews.get_update_view()
+StatusesDeleteView = StatusViews.get_delete_view()

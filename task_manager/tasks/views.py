@@ -1,6 +1,6 @@
 from task_manager.tasks.forms import TaskForm, TaskFilter
 from task_manager.tasks.models import Task
-from task_manager.core.tasks.bases import (
+from task_manager.core.tasks.views_bases import (
     BaseTasksDetailView,
     BaseTasksFilterView,
     BaseTasksCreateView,

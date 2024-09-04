@@ -1,7 +1,7 @@
 from task_manager.users.models import User
 from task_manager.users.forms import UsersCreateForm, UsersUpdateForm
 from task_manager.core.related_deletion_mixins import DeleteOneToManyMixin
-from task_manager.core.users.bases import (
+from task_manager.core.users.views_bases import (
     BaseUsersIndexView,
     BaseUsersCreateView,
     BaseUsersUpdateView,

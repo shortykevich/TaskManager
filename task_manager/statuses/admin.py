@@ -1,10 +1,9 @@
 from django.contrib import admin
 
+from task_manager.core.statuses_labels.admin_bases import BaseAdmin
 from task_manager.statuses.models import Status
 
 
 @admin.register(Status)
-class UsersAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
-    search_fields = ('name', 'created_at')
-    list_filter = ('name', 'created_at')
+class UsersAdmin(BaseAdmin, admin.ModelAdmin):
+    pass

@@ -19,7 +19,7 @@ Registration and authentication are required to work with the system.
 
 ## Installation:
 ```bash
-git clone git@github.com:shortykevich/TaskManager.git
+git clone git@github.com:shortykevich/TaskManager.git && cd TaskManager
 make install
 ```
 #### Project heavily depends on environment variables, so it's suggested to create **.env** file
